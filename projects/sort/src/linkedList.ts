@@ -1,10 +1,13 @@
+import { Sortable } from './Sort';
+import { Sorter } from './Sort';
+
 class Node {
   next: Node | null = null;
 
   constructor(public data: number) {}
 }
 
-export class linkedList {
+export class linkedList extends Sorter implements Sortable {
   head: Node | null = null;
 
   //add new item to list
@@ -22,6 +25,7 @@ export class linkedList {
       tail = tail.next;
     }
 
+    //set pointer of last node to newly created node
     tail.next = node;
   }
 
