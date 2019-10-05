@@ -1,6 +1,9 @@
+import Axios, { AxiosResponse } from 'axios';
+
 interface userProps {
   name?: string;
   age?: number;
+  id?: number;
 }
 
 type Callback = () => void;
@@ -36,5 +39,27 @@ export class User {
     handler.forEach((callback: Callback) => {
       callback();
     });
+  }
+
+  //fetch some data from json file
+  fetch(): void {
+    Axios.get(`http://localhost:3000/users/${this.get('id')}`).then(
+      (response: AxiosResponse): void => {
+        this.set(response.data);
+      }
+    );
+  }
+
+  //save some data to json file
+  save(): void {
+    const id = this.get('id');
+
+    if (id) {
+      //put request
+      Axios.put(`http://localhost:3000/users/${id}`, this.data;
+    } else {
+      //post request
+      Axios.post(`http://localhost:3000/users`, this.data)
+    }
   }
 }
